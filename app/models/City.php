@@ -28,4 +28,14 @@ class City extends Eloquent {
         return $this->hasMany('Recipe');
     }
 
+    public function scopeCitystate() {
+        $cities = City::all();
+        $location = [];
+        foreach ($cities as $city) {
+            $currLoc = $city->city_name . ", " . $city->state->state_name;
+            $location[$currLoc] = $currLoc;
+        }
+        return $location;
+    }
+
 }

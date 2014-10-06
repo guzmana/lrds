@@ -14,7 +14,7 @@ class State extends Eloquent {
      */
 
     public function cities() {
-        return $this->has_many('City');
+        return $this->hasMany('City');
     }
 
     /*
@@ -25,5 +25,9 @@ class State extends Eloquent {
     public function recipes() {
         return $this->hasManyThrough('Recipe', 'City');
     }
-
+    
+    public function scopeNames($query) {
+        $names = State::all()->lists('state_name');
+        return array_combine($names, $names);
+    }
 }

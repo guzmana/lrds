@@ -14,7 +14,12 @@ class Episode extends Eloquent {
      */
 
     public function recipes() {
-        return $this->has_many('Recipe');
+        return $this->hasMany('Recipe');
+    }
+
+    public function scopeNames() {
+        $episode = Episode::all()->lists('episode_name');
+        return array_combine($episode, $episode);
     }
 
 }

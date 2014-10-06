@@ -13,7 +13,7 @@ class Recipe extends Eloquent {
      * A Recipe belongs to an Episode.
      */
 
-    public function episodes() {
+    public function episode() {
         return $this->belongsTo('Episode');
     }
 
@@ -31,6 +31,17 @@ class Recipe extends Eloquent {
 
     public function ingredients() {
         return $this->belongsToMany('Ingredient');
+    }
+
+    public function validate($input) {
+
+        $rules = array(
+            'recipe_name' => 'Required|Alpha|unique:recipes',
+            'time_start' => 'Required|Integer',
+            'time_end' => 'Required|Integer',
+        );
+
+        return Validator::make($input, $rules);
     }
 
 }
